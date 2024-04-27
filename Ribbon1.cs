@@ -8,18 +8,25 @@ namespace AdvancedCalculator
 {
 	public partial class Ribbon1
 	{
+		public bool CheckOpenedFile(string fileName)
+		{
+			var workBook = Globals.ThisAddIn.Application.ActiveWorkbook;
+			var workbookName = "";
+			if (workBook != null)
+			{
+				workbookName = workBook.Name;
+			}
+			return (workbookName == fileName);
+		}
 		private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
 		{
+			if (!CheckOpenedFile("MSFT.xls")) Globals.ThisAddIn.taskPaneObject.Visible = false;
 		}
 
 		private void toggleButton1_Click(object sender, RibbonControlEventArgs e) {
 			
-			var workBook = Globals.ThisAddIn.Application.ActiveWorkbook;
-			var workbookName = "";
-			if (workBook != null){
-				workbookName = workBook.Name;
-			}
-			if (workbookName != "MSFT.xls") return;
+
+			if (!CheckOpenedFile( "MSFT.xls")) return;
 			
 			if (toggleButton1.Checked) {
 				toggleButton1.Label = "OFF";
