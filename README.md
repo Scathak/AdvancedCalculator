@@ -1,2 +1,0 @@
-# AdvancedCalculator
-calculator for Excel
